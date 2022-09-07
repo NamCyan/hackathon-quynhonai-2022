@@ -1,0 +1,37 @@
+userName,userID,locationID,locationName,arrivalTime,duration,preference
+Hildred Augustine,0,1737,Bún Vân - Bún Bò Huế,"[1.64, 2.24]","[2.84, 3.15]",2
+Hildred Augustine,0,1859,Quán Nhậu Bình Dân Long Vân,"[0, 1.69]","[1.96, 3.83]",4
+Hildred Augustine,0,486,Cà Phê - Kem Sakura,"[8.12, 9.08]","[0.87, 2.31]",5
+Hildred Augustine,0,2061,Bau Sen Park,"[8.99, 9.0]","[0.69, 2.75]",1
+Hildred Augustine,0,957,Karaoke Thiên Phúc,"[11.86, 13.9]","[0.73, 1.66]",2
+Hildred Augustine,0,2071,Công viên Nhân Ái,"[8.98, 13.02]","[0.88, 1.92]",2
+Hildred Augustine,0,931,Massage Tân Hoàng Gia 1,"[9.58, 12.52]","[0.92, 2.01]",2
+Hildred Augustine,0,233,Life's A Beach,"[0, 0.33]","[2.55, 4.42]",1
+Gary Stevens,1,1859,Quán Nhậu Bình Dân Long Vân,"[4.81, 5.64]","[1.41, 2.7]",2
+Gary Stevens,1,486,Cà Phê - Kem Sakura,"[8.92, 9.02]","[0.87, 1.1]",1
+Gary Stevens,1,320,Ngõ Coffee & Homestay,"[6.0, 6.02]","[0.73, 2.92]",4
+Gary Stevens,1,2071,Công viên Nhân Ái,"[10.38, 11.55]","[0.95, 2.43]",3
+Gary Stevens,1,2069,Mộ Hàn Mặc Tử,"[8.65, 11.2]","[0.22, 0.7]",2
+Perry Lofton,2,1737,Bún Vân - Bún Bò Huế,"[0, 1.43]","[1.33, 2.82]",4
+Perry Lofton,2,1859,Quán Nhậu Bình Dân Long Vân,"[9.17, 11.06]","[0.55, 1.4]",4
+Perry Lofton,2,2061,Bau Sen Park,"[8.65, 9.02]","[1.07, 2.42]",4
+Perry Lofton,2,957,Karaoke Thiên Phúc,"[11.9, 13.72]","[1.36, 2.32]",4
+Perry Lofton,2,2071,Công viên Nhân Ái,"[10.56, 12.29]","[0.3, 1.9]",2
+Perry Lofton,2,233,Life's A Beach,"[2.21, 3.96]","[2.74, 4.58]",4
+Perry Lofton,2,2069,Mộ Hàn Mặc Tử,"[10.18, 11.34]","[0.22, 1.57]",2
+Michael Heil,3,1859,Quán Nhậu Bình Dân Long Vân,"[7.41, 7.42]","[1.77, 2.88]",4
+Michael Heil,3,486,Cà Phê - Kem Sakura,"[8.39, 9.01]","[0.79, 1.26]",2
+Michael Heil,3,957,Karaoke Thiên Phúc,"[11.59, 15.84]","[0.18, 1.87]",3
+Michael Heil,3,2069,Mộ Hàn Mặc Tử,"[10.44, 11.13]","[0.5, 2.1]",5
+Rosemary Miles,4,1859,Quán Nhậu Bình Dân Long Vân,"[2.23, 3.9]","[1.92, 3.67]",1
+Rosemary Miles,4,2061,Bau Sen Park,"[8.71, 9.01]","[1.31, 3.31]",5
+Rosemary Miles,4,320,Ngõ Coffee & Homestay,"[5.94, 6.18]","[0.64, 2.12]",2
+Rosemary Miles,4,957,Karaoke Thiên Phúc,"[11.71, 12.23]","[0.05, 2.21]",3
+Rosemary Miles,4,2071,Công viên Nhân Ái,"[10.05, 11.78]","[0.67, 1.94]",3
+Rosemary Miles,4,931,Massage Tân Hoàng Gia 1,"[9.55, 13.34]","[1.02, 2.04]",3
+Rosemary Miles,4,2069,Mộ Hàn Mặc Tử,"[9.26, 11.43]","[0.38, 1.61]",2
+Xavier Rodriguez,5,2061,Bau Sen Park,"[9.0, 9.07]","[0.72, 1.94]",1
+Xavier Rodriguez,5,320,Ngõ Coffee & Homestay,"[5.96, 6.71]","[0.17, 3.22]",1
+Xavier Rodriguez,5,957,Karaoke Thiên Phúc,"[11.97, 14.14]","[1.11, 2.73]",3
+Xavier Rodriguez,5,233,Life's A Beach,"[1.4, 2.16]","[2.01, 3.67]",2
+Xavier Rodriguez,5,2069,Mộ Hàn Mặc Tử,"[7.27, 11.46]","[0.17, 2.44]",3
