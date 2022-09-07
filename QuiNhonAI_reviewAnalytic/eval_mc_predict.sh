@@ -1,0 +1,19 @@
+CUDA_VISIBLE_DEVICES="0" python3 eval_mc_predict.py \
+  --model_name_or_path  ../QuiNhonAI/vi-roberta-large-multi-part2/ \
+  --train_file ../QuiNhonAI/data/train_processed.json  \
+  --validation_file ../QuiNhonAI/data/dev_processed.json \
+  --model_type multi \
+  --do_lower_case \
+  --evaluation_strategy steps \
+  --eval_steps 200 \
+  --save_steps 500 \
+  --save_total_limit 5 \
+  --max_seq_length 256 \
+  --per_device_train_batch_size 16 \
+  --per_device_eval_batch_size 32 \
+  --learning_rate 1e-5 \
+  --num_train_epochs 15 \
+  --overwrite_cache \
+  --overwrite_output_dir \
+  --output_dir ../QuiNhonAI/vi-roberta-large-multi-part2/ \
+  --cache_dir ../QuiNhonAI/cache 

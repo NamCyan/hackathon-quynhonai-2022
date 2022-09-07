@@ -1,0 +1,22 @@
+CUDA_VISIBLE_DEVICES="2" python3 train_aspect_detection.py \
+  --model_name_or_path /media/Z/namlh31/vi-roberta-base/ \
+  --train_file /media/Z/namlh31/QuiNhon_hackathon/hackathon_data/train_augment_subtitute.csv \
+  --validation_file /media/Z/namlh31/QuiNhon_hackathon/hackathon_data/dev_processed.csv \
+  --is_pair \
+  --do_train \
+  --do_eval \
+  --model_type pair \
+  --do_lower_case \
+  --evaluation_strategy steps \
+  --eval_steps 200 \
+  --save_steps 5000 \
+  --save_total_limit 5 \
+  --max_seq_length 256 \
+  --per_device_train_batch_size 16 \
+  --per_device_eval_batch_size 32 \
+  --learning_rate 2e-5 \
+  --num_train_epochs 10 \
+  --overwrite_cache \
+  --overwrite_output_dir \
+  --output_dir /media/Z/namlh31/QuiNhon_hackathon/results/vi-roberta-base-detection-weighted/ \
+  --cache_dir /home/namlh31/cache/
