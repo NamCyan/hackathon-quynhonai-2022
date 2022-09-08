@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import pandas as pd
+from time import time
 
 class Solver:
     """
@@ -13,6 +14,8 @@ class Solver:
         self.roadtrip_csv = roadtrip_csv
         self.transport_csv = transport_csv
         self.budget_csv = budget_csv 
+
+        self.time_limitation = 20*60
 
         self.get_info()
 
@@ -235,7 +238,7 @@ class Solver:
                     if tmp_total_cost >= minCost and (tmp_total_cost - maxCost) < best_tmp_cost:
                         best_tmp_cost = tmp_total_cost
                         
-                        planning[loc2loc][4] = transport
+                        planning[key][4] = transport
 
                 totalCost = best_tmp_cost
 
@@ -301,8 +304,10 @@ class Solver:
 
             positive_score = 0
             for route in planning:
-                if planning[route]['score'] > 0:
+                if planning[route]['score'] >= 0:
                     positive_score += planning[route]['score']
+                else:
+                    break
 
             if positive_score > best_positive_score:
                 best_positive_score = positive_score
@@ -310,21 +315,48 @@ class Solver:
 
         return best_planning, best_positive_score
 
-            # print(len(planning))
-            # break
 
+    def plan_for_all_day_capacity(self, home_location, planning_day):
+        
+        #get_worst_reduction_in_score
+
+        worst_location = None
+        worst_day = 1
+        plan_for_day = 1
+        worst_score = -1e3
+        for day in planning_day:
+            if planning_day[day] == None:
+                plan_for_day = day
+                break
+
+            last_route = list(planning_day[day].keys())[-1]
+            location_id = int(last_route.split("->")[1])
+            reduced_score = self.user_arrival_duration_time[location_id]['best_score'] - planning_day[day][last_route]['score']
+            if reduced_score > worst_score:
+                worst_score = reduced_score
+                worst_location = location_id
+                worst_day = day
+        
+        planning_day[worst_day] = dict(list(planning_day[worst_day].items())[:-1])
+        planning_day[plan_for_day] = {}
+
+        planning_day[plan_for_day]["{}->{}".format(home_location, worst_location)] = {"arrivalTime": self.user_arrival_duration_time[worst_location]["best_arrivalTime"], "duration": self.user_arrival_duration_time[worst_location]["best_duration"], "cost": self.location_csv[worst_location]["minPrice"] * self.person_count, "transport": self.max_cost_transport, 'score': self.user_arrival_duration_time[worst_location]['best_score']}
+        return planning_day
+        
 
     def solve(self):
         """
         Brute force to find the best solution
         """ 
-        print("Start to solve the problem!")
+        # print("Start to solve the problem!")
 
         planning_day = {i+1: None for i in range(int(self.max_days))}
 
         # Find best with 1 day
         best_positive_score = -1e5
         best_planning = None
+
+        time_start = time()
         for home_location in self.location_arr:
             unvisited_locations = self.location_arr.copy()
             unvisited_locations.remove(home_location)
@@ -333,6 +365,10 @@ class Solver:
             if positive_score > best_positive_score:
                 best_positive_score = positive_score
                 best_planning = planning
+
+            time_solve = time() - time_start
+            if time_solve > 0.8 * self.time_limitation:
+                break
         
         for route in best_planning:
             home_location = int(route.split("->")[0])
@@ -398,6 +434,10 @@ class Solver:
             current_planning, _ = self.solve_single(home_location, unvisited_locations)
             plan_for_day += 1
 
+        # plan for none day
+        # while None in planning_day.values():
+        #     planning_day = self.plan_for_all_day_capacity(home_location, planning_day)
+
 
         # print(planning_day)
         final_planning = {}
@@ -437,7 +477,7 @@ class Solver:
         # print("="*100)
         final_planning = self.fix_total_cost(final_planning)
 
-        # print(self.evaluate(final_planning))
+        print(self.evaluate(final_planning))
         submission = self.save_solution(final_planning)
         return submission
         
