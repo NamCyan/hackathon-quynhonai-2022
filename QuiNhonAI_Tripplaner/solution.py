@@ -303,9 +303,11 @@ class Solver:
                 pre_accumulated_time = result['arrivalTime'] + result['duration']
 
             positive_score = 0
+            prearrival_time = -1e3
             for route in planning:
-                if planning[route]['score'] >= 0:
+                if planning[route]['score'] >= 0 and planning[route]['arrivalTime'] > prearrival_time:
                     positive_score += planning[route]['score']
+                    prearrival_time = planning[route]['arrivalTime']
                 else:
                     break
 
@@ -367,7 +369,7 @@ class Solver:
                 best_planning = planning
 
             time_solve = time() - time_start
-            if time_solve > 0.8 * self.time_limitation:
+            if time_solve > 0.9 * self.time_limitation:
                 break
         
         for route in best_planning:
@@ -597,7 +599,7 @@ if __name__ == "__main__":
     import warnings
     warnings.filterwarnings("ignore")
 
-    src = "./data/QAIPublic/Q1/"
+    src = "./data/QAIPublic/Q2/"
     budget_file = src + "budget.csv"
     location_file = src + "location.csv"
     roadtrip_file = src + "roadtrip.csv"
