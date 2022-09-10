@@ -52,7 +52,7 @@ class Solver:
         for location_id in self.user_arrival_duration_time:
             self.user_arrival_duration_time[location_id]['best_arrivalTime'] = self.best_fitness(self.user_arrival_duration_time[location_id]['arrivalTime'])
             self.user_arrival_duration_time[location_id]['best_duration'] = self.best_fitness(self.user_arrival_duration_time[location_id]['duration']) 
-            self.user_arrival_duration_time[location_id]['best_score'] = self.evaluate_single_location(location_id, self.user_arrival_duration_time[location_id]['best_arrivalTime'], self.user_arrival_duration_time[location_id]['best_duration'], self.location_csv[location_id]['minPrice']*self.person_count, None)[0]
+            self.user_arrival_duration_time[location_id]['best_score'] = self.evaluate_single_location(location_id, self.user_arrival_duration_time[location_id]['best_arrivalTime'], self.user_arrival_duration_time[location_id]['best_duration'], self.location_csv[location_id]['minPrice']*self.person_count, None)
 
         # print(self.user_arrival_duration_time)
         # Get max days
@@ -158,7 +158,7 @@ class Solver:
                 if arrivalTime > 24:
                     arrivalTime -= 24 * (arrivalTime // 24)
 
-                score = self.evaluate_single_location(next_location, arrivalTime, duration, all_cost, home_location)[0]
+                score = self.evaluate_single_location(next_location, arrivalTime, duration, all_cost, home_location)
                 if score > best_score:
                     best_score = score
                     current_best = {'location': next_location, 'arrivalTime': arrivalTime, 'duration': duration, 'cost': all_cost, 'transport': transport_id, 'score': score}
@@ -168,7 +168,7 @@ class Solver:
         return current_best, remain_locations
 
     def fix_total_cost(self, planning, home_location):
-        new_planning = planning.copy()
+        new_planning = copy.deepcopy(planning)
         minCost, maxCost = self.budget_csv['minWallet'], self.budget_csv['maxWallet']
         totalCost = 0
         for i, (key, value) in enumerate(new_planning.items()):
@@ -311,7 +311,7 @@ class Solver:
                     list_route[home_index] = ("{}->{}".format(pre_location, home_location), new_value)
             # print(list_route)
             tmp_planning = dict(list_route)
-            tmp_planning = self.fix_total_cost(copy.deepcopy(tmp_planning), home_location)
+            tmp_planning = self.fix_total_cost(tmp_planning, home_location)
         
             tmp_score = self.evaluate(tmp_planning)
             # print(home_location, tmp_score)
@@ -321,7 +321,7 @@ class Solver:
                 new_home_location = home_location
             # break
 
-        print(best_score, new_home_location)
+        # print(best_score, new_home_location)
         # best_planning = self.fix_total_cost(best_planning, new_home_location)
         return best_planning
 
@@ -346,7 +346,7 @@ class Solver:
             else:
                 all_cost = self.location_csv[first_visited_location]['minPrice']* self.person_count + 1e-6
 
-            score = self.evaluate_single_location(first_visited_location, arrivalTime, duration, all_cost, home_location)[0]
+            score = self.evaluate_single_location(first_visited_location, arrivalTime, duration, all_cost, home_location)
             
             
             result = {'arrivalTime': arrivalTime, 'duration': duration, 'cost': all_cost, 'transport': transport_id, 'score': score}
@@ -525,8 +525,8 @@ class Solver:
         return final_planning
 
     def exploration(self):
-        explore_sets = [self.bad_locations, self.location_arr]
-        num_explore_set = 10
+        explore_sets = [self.full_locations]
+        num_explore_set = 0
         explore_set_size= int(len(self.full_locations) * 0.3)
     
         for i in range(num_explore_set):
@@ -598,9 +598,7 @@ class Solver:
         return True       
         
     def evaluate_single_location(self, location_id, arrivalTime, duration, spend_money, home_location):
-        scoretimewidow = 0
-        scorepreference = 0
-        scoreprice = 0
+        score = 0
         # Time arrival and duration
         def cal_timearrival_score(time, time_window):
             lower_time, upper_time = time_window
@@ -614,22 +612,22 @@ class Solver:
         if location_id != home_location:        
             #user preference
 
-            scorepreference += 0.2 * np.linalg.norm(self.user_preference_location[location_id]) ** 2
+            score += 0.2 * np.linalg.norm(self.user_preference_location[location_id]) ** 2
 
             for i in range(len(self.user_arrival_duration_time[location_id]["arrivalTime"])):
                 arrival_time_window = self.user_arrival_duration_time[location_id]["arrivalTime"][i]
                 duration_time_window = self.user_arrival_duration_time[location_id]["duration"][i]
-                scoretimewidow += (cal_timearrival_score(arrivalTime, arrival_time_window) + cal_timearrival_score(duration, duration_time_window))
+                score += (cal_timearrival_score(arrivalTime, arrival_time_window) + cal_timearrival_score(duration, duration_time_window))
         
         # Money 
         # all_cost_per_user = spend_money / self.person_count
         # transport_cost_per_user = transport_cost / self.person_count
         if self.location_csv[location_id]['minPrice'] * self.person_count <= spend_money <= self.location_csv[location_id]['maxPrice'] * self.person_count:
-            scoreprice += 5
+            score += 5
         else:
-            scoreprice -= 10
+            score -= 10
 
-        return scoretimewidow + scorepreference + scoreprice, scoretimewidow, scorepreference, scoreprice
+        return score
 
     def evaluate(self, planning, print_info= False):
         
@@ -660,10 +658,10 @@ class Solver:
             score = self.evaluate_single_location(current_location, arrival_time, duration, spend_money, home_location)
 
             # print(key, score)
-            total_score += score[0]
-            scoretime += score[1]
-            scorepreference += score[2]
-            scoreprice += score[3]
+            total_score += score
+            # scoretime += score[1]
+            # scorepreference += score[2]
+            # scoreprice += score[3]
 
         if minCost <= totalCost <= maxCost:
             total_score += 50
@@ -685,7 +683,7 @@ if __name__ == "__main__":
     import warnings
     warnings.filterwarnings("ignore")
 
-    src = "./data/Q3/"
+    src = "./data/Q1/"
     budget_file = src + "budget.csv"
     location_file = src + "location.csv"
     roadtrip_file = src + "roadtrip.csv"

@@ -233,7 +233,7 @@ if __name__ == '__main__':
     # file_handler.setFormatter(formatter)
     # logger.addHandler(file_handler)
     # logger.info('Start evaluating')
-    PATH = './data/Q3/'
+    PATH = './data/Q1/'
 
     evaluation = Evaluation(PATH)
     SCORE = evaluation.score_evaluation()
