@@ -16,7 +16,7 @@
 
 import zipfile
 import pandas as pd
-from new_solution import Solver
+from solution import Solver
 from flask import Flask, request, Response, send_file
 
 app = Flask(__name__)
