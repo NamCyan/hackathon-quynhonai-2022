@@ -1,5 +1,3 @@
-from re import T
-from sqlite3 import Time
 import pandas as pd
 import numpy as np
 import pandas as pd
@@ -309,20 +307,16 @@ class Solver:
                     new_value[2] = self.user_arrival_duration_time[home_location]['best_duration']
                     new_value[3] = self.location_csv[home_location]['minPrice'] * self.person_count
                     list_route[home_index] = ("{}->{}".format(pre_location, home_location), new_value)
-            # print(list_route)
+
             tmp_planning = dict(list_route)
             tmp_planning = self.fix_total_cost(tmp_planning, home_location)
         
             tmp_score = self.evaluate(tmp_planning)
-            # print(home_location, tmp_score)
+
             if tmp_score > best_score:
                 best_score = tmp_score
                 best_planning = copy.deepcopy(tmp_planning)
-                new_home_location = home_location
-            # break
 
-        # print(best_score, new_home_location)
-        # best_planning = self.fix_total_cost(best_planning, new_home_location)
         return best_planning
 
     def solve_single(self, home_location, unvisited_locations):
@@ -472,7 +466,7 @@ class Solver:
             current_planning, _ = self.solve_single(home_location, unvisited_locations)
             plan_for_day += 1
 
-        # plan for none day
+        # plan for none day. Use all day capacity
         while None in planning_day.values():
             planning_day = self.plan_for_all_day_capacity(home_location, planning_day)
 
