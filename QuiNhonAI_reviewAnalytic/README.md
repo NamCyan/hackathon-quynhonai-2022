@@ -8,4 +8,4 @@ train_aspect_detection.sh
 
 get_null_score.py
 
-ensembel.py
+ensemble.py
