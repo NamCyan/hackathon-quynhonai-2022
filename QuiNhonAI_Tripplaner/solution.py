@@ -419,6 +419,7 @@ class Solver:
                     continue
                 if value['score'] < 0 or value['arrivalTime'] < previous_arrivalTime:
                     return i
+                previous_arrivalTime = value['arrivalTime']
 
             return arnomal_index
 
@@ -677,7 +678,7 @@ if __name__ == "__main__":
     import warnings
     warnings.filterwarnings("ignore")
 
-    src = "./data/Q1/"
+    src = "../../tripplanner_data/Q3/"
     budget_file = src + "budget.csv"
     location_file = src + "location.csv"
     roadtrip_file = src + "roadtrip.csv"
