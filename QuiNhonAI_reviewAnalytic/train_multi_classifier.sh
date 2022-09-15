@@ -4,7 +4,7 @@ CUDA_VISIBLE_DEVICES="2" python3 custom_train.py \
   --validation_file /media/Z/namlh31/QuiNhon_hackathon/hackathon_data/dev_processed.json \
   --do_eval \
   --do_train \
-  --model_type ensemble \
+  --model_type mixlayer \
   --do_lower_case \
   --evaluation_strategy steps \
   --eval_steps 200 \
@@ -16,5 +16,5 @@ CUDA_VISIBLE_DEVICES="2" python3 custom_train.py \
   --learning_rate 2e-5 \
   --num_train_epochs 10 \
   --overwrite_output_dir \
-  --output_dir /media/Z/namlh31/QuiNhon_hackathon/results/vi-roberta-large-ensemble-PSUM-weighted/ \
+  --output_dir /media/Z/namlh31/QuiNhon_hackathon/results/vi-roberta-large-mixlayer-PSUM/ \
   --cache_dir /home/namlh31/cache/
