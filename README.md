@@ -1,3 +1,3 @@
 # QuiNhonAI2022
 
-3rd rank in both tasks
+3rd place in both tasks
