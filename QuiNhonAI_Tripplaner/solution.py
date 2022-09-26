@@ -520,7 +520,7 @@ class Solver:
         return final_planning
 
     def exploration(self):
-        explore_sets = [self.full_locations]
+        explore_sets = [self.bad_locations, self.location_arr]
         num_explore_set = 0
         explore_set_size= int(len(self.full_locations) * 0.3)
     
