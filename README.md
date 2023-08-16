@@ -13,7 +13,8 @@ The largest AI competition for engineers organized by Quy Nhon AI Center, FPT So
 
 ## Competition contact
 Fanpage: [Quy Nhơn AI Community](https://www.facebook.com/QNAICommunity)
-Website: quynhon.ai
+
+Website: [quynhon.ai](https://hackathon.quynhon.ai/hackathon-2022/home)
 
 ## Competition ranking
 My team - NamCyan achieves 3rd place in both Review Analytics and Trip planner (final round)
