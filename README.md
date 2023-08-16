@@ -12,10 +12,10 @@ My team - NamCyan achieves 3rd place in both Review Analytics and Trip planner (
 
 ### Review Analytics
 <p align="center">
-  <img src="./asset/reviewanalytics_leaderboard.png" width="500px">
+  <img src="./asset/reviewanalytics_leaderboard.png">
 </p>
 
 ### Trip planner
 <p align="center">
-  <img src="./asset/tripplanner_leaderboard.png" width="500px">
+  <img src="./asset/tripplanner_leaderboard.png">
 </p>
