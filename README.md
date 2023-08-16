@@ -1,4 +1,4 @@
-# Quy Nhon AI Hackathon 2022
+# Quy Nhon AI Hackathon 2022 (8/2022)
 
 ## Table of content
 - [Competition description](#competition-description)
