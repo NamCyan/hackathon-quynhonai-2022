@@ -3,7 +3,7 @@
 ## Table of content
 - [Competition description](#competition-description)
 - [Competition contact](#competition-contact)
-- [Competition ranking](#competition-ranking)
+- [Leaderboard](#leaderboard)
   - [Review Analytics](#review-analytics)
   - [Trip planner](#trip-planner)
 - [Contact](#contact)
@@ -16,7 +16,7 @@ Fanpage: [Quy Nhơn AI Community](https://www.facebook.com/QNAICommunity)
 
 Website: [quynhon.ai](https://hackathon.quynhon.ai/hackathon-2022/home)
 
-## Competition ranking
+## Leaderboard
 My team - NamCyan achieves 3rd place in both Review Analytics and Trip planner (final round)
 
 ### Review Analytics
